@@ -11,7 +11,7 @@ output "names" {
 
 output "ids" {
   description = "Contains a list of the resource id of the subnets"
-  value       = { for subnet in azurerm_subnet.this : subnet.name => subnet.id }
+  value       = [for subnet in azurerm_subnet.this : subnet.name]
 }
 
 output "address_prefixes" {
