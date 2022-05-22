@@ -1,14 +1,20 @@
-# output "names" {
-#   description = "Contains a list of the resource name of the subnets"
-#   #value       = { for subnet in azurerm_subnet.this : subnet.name => subnet.name }
-#   value = for_each azurerm_subnet.this[*].name
-# }
+#output "names" {
+#  description = "Contains a list of the resource name of the subnets"
+#  value       = { for subnet in azurerm_subnet.this : subnet.name => subnet.name }
+#}
 
 output "names" {
   description = "Contains a list of the resource name of the subnets"
-  value = for_each = map(
-    "name", azurerm_subnet.this[each.key].name
-  )
+  value = [for subnet in azurerm_subnet.this : subnet.name
+    if subnet.name != "GatewaySubnet" && subnet.name != "AzureFirewallSubnet" && subnet.name != "AzureFirewallManagementSubnet" && subnet.name != "AzureBastionSubnet" && subnet.name != "RouteServerSubnet"
+  ]
+}
+
+output "names_services" {
+  description = "Contains a list of the resource name of the azuer reserved subnets"
+  value = [for subnet in azurerm_subnet.this : subnet.name
+    if subnet.name == "GatewaySubnet" || subnet.name == "AzureFirewallSubnet" || subnet.name == "AzureFirewallManagementSubnet" || subnet.name == "AzureBastionSubnet" || subnet.name == "RouteServerSubnet"
+  ]
 }
 
 output "ids" {
