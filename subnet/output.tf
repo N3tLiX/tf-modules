@@ -5,15 +5,15 @@
 
 output "names" {
   description = "Contains a list of the resource name of the subnets"
-  value = [for subnet in azurerm_subnet.this : subnet.name
-    if subnet.name != "GatewaySubet" || subnet.name != "AzureFirewallSubnet" || subnet.name != "AzureFirewallManagementSubnet" || subnet.name != "AzureBastionSubnet"
+  value = [for subnet in azurerm_subnet.this : subnet
+    if subnet != "GatewaySubet" || subnet != "AzureFirewallSubnet" || subnet != "AzureFirewallManagementSubnet" || subnet != "AzureBastionSubnet" || subnet != "RouteServerSubnet"
   ]
 }
 
 output "names_services" {
   description = "Contains a list of the resource name of the subnets"
   value = [for subnet in azurerm_subnet.this : subnet.name
-    if subnet.name == "GatewaySubet" || subnet.name == "AzureFirewallSubnet" || subnet.name == "AzureFirewallManagementSubnet" || subnet.name == "AzureBastionSubnet"
+    if subnet.name == "GatewaySubet" || subnet.name == "AzureFirewallSubnet" || subnet.name == "AzureFirewallManagementSubnet" || subnet.name == "AzureBastionSubnet" || subnet.name == "RouteServerSubnet"
   ]
 }
 

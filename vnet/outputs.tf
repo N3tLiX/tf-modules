@@ -18,6 +18,11 @@ output "subnet_names" {
   value       = module.subnets.names
 }
 
+output "subnet_names" {
+  description = "Contains a list of the resource name of the subnets"
+  value       = module.subnets.names_services
+}
+
 output "subnet_ids" {
   description = "Contains a list of the resource id of the subnets"
   value       = module.subnets.ids
