@@ -13,8 +13,22 @@ output "vnet_address_space" {
   value       = data.azurerm_virtual_network.this.address_space
 }
 
+output "subnet_names" {
+  description = "Contains a list of the resource name of the subnets"
+  value = [for subnet in data.azurerm_subnet.this : subnet.name
+    if subnet.name != "GatewaySubnet" && subnet.name != "AzureFirewallSubnet" && subnet.name != "AzureFirewallManagementSubnet" && subnet.name != "AzureBastionSubnet" && subnet.name != "RouteServerSubnet"
+  ]
+}
+
+output "subnet_service_names" {
+  description = "Contains a list of the resource name of the azuer reserved subnets"
+  value = [for subnet in data.azurerm_subnet.this : subnet.name
+    if subnet.name == "GatewaySubnet" || subnet.name == "AzureFirewallSubnet" || subnet.name == "AzureFirewallManagementSubnet" || subnet.name == "AzureBastionSubnet" || subnet.name == "RouteServerSubnet"
+  ]
+}
+
 output "subnet_ids" {
-  description = "Contains a list of the the resource id of the subnets"
+  description = "Contains a list of the resource id of the subnets"
   value       = { for subnet in data.azurerm_subnet.this : subnet.name => subnet.id }
 }
 
