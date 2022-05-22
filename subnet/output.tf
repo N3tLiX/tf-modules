@@ -6,9 +6,7 @@
 
 output "names" {
   description = "Contains a list of the resource name of the subnets"
-  value = { for_each = map(
-    "name", azurerm_subnet.this[each.key].name
-  ) }
+  value       = toset(azurerm_subnet.this[*].name)
 }
 
 output "ids" {
