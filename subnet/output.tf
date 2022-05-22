@@ -5,7 +5,7 @@
 
 output "names" {
   description = "Contains a list of the resource name of the subnets"
-  value = [for subnet in toset(azurerm_subnet.this) : subnet.name
+  value = [for subnet in azurerm_subnet.this : subnet.name
     if subnet.name != "GatewaySubet" || subnet.name != "AzureFirewallSubnet" || subnet.name != "AzureFirewallManagementSubnet" || subnet.name != "AzureBastionSubnet"
   ]
 }
