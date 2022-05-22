@@ -18,7 +18,7 @@ output "subnet_names" {
   value       = module.subnets.names
 }
 
-output "subnet_names" {
+output "subnet_names_services" {
   description = "Contains a list of the resource name of the subnets"
   value       = module.subnets.names_services
 }
