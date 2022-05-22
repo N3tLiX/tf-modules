@@ -5,7 +5,7 @@
 
 output "names" {
    description = "Contains a list of the resource name of the subnets"
-   value       = toset(azurerm_subnet.this[*].name)
+   value       = toset(azurerm_subnet.this.*)
  }
 
 output "ids" {
