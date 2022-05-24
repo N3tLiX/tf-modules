@@ -1,7 +1,7 @@
 output "nsg_name" {
-  value = azurerm_network_security_group.this.name
+  value = data.azurerm_network_security_group.this.name
 }
 
 output "nsg_id" {
-  value = azurerm_network_security_group.this.id
+  value = data.azurerm_network_security_group.this.id
 }
