@@ -22,6 +22,14 @@ resource "azurerm_network_security_group" "this" {
   }
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
+
 resource "azurerm_network_security_rule" "this" {
   for_each = { for rule in var.rules : rule.name => rule }
 

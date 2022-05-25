@@ -8,6 +8,14 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
+
 resource "azurerm_public_ip" "config" {
   count               = var.sku_name != "AZFW_Hub" ? var.public_ip_count : 0
   name                = "${var.name}-${count.index + 1}-pip"

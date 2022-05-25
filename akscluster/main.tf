@@ -8,6 +8,13 @@ terraform {
   required_version = ">=0.14.9"
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
 data "azurerm_user_assigned_identity" "aks_identity" {
   name                = var.aks_identity_name
   resource_group_name = var.aks_identity_resource_group_name

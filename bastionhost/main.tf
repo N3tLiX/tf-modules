@@ -8,6 +8,14 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
+
 resource "azurerm_public_ip" "public_ip" {
   name                = "${var.name}-pip"
   location            = var.location

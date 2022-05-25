@@ -8,6 +8,14 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
+
 resource "azurerm_virtual_network" "this" {
   name                = var.vnet_name
   address_space       = var.address_space

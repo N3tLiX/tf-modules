@@ -8,6 +8,14 @@ terraform {
   required_version = ">= 0.14.9"
 }
 
+locals {
+  module_tag = {
+    "module" = basename(abspath(path.module))
+  }
+  tags = merge(var.tags, local.module_tag)
+}
+
+
 resource "azurerm_private_endpoint" "private_endpoint" {
   name                = var.name
   location            = var.location
