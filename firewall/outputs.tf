@@ -1,6 +1,6 @@
 output "ip" {
   description = "Specifies the ID of the firewall."
-  value       = azurerm_firewall.this.ip
+  value       = azurerm_firewall.this.id
 }
 
 output "private_ip_address" {
