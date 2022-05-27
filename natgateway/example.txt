@@ -1,0 +1,29 @@
+module "nat_gateway" {
+  source              = "../modules/nat_gateway"
+  name                = var.nat_gateway_name
+  resource_group_name = data.azurerm_resource_group.this.name
+  location            = data.azurerm_resource_group.this.location
+  prefix_enabled      = false
+  subnets_to_associate = {
+    ("sn-zs-app-connector") = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = data.azurerm_resource_group.this.name
+      virtual_network_name = module.network.name
+    },
+    ("sn-zs-cloud-connector") = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = data.azurerm_resource_group.this.name
+      virtual_network_name = module.network.name
+    },
+    ("sn-zs-system") = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = data.azurerm_resource_group.this.name
+      virtual_network_name = module.network.name
+    },
+    ("sn-zs-service") = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = data.azurerm_resource_group.this.name
+      virtual_network_name = module.network.name
+    }
+  }
+}
